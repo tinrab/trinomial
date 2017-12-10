@@ -33,6 +33,7 @@ void APPlayerController::MoveVertical(float AxisValue)
 {
 	FVector Direction = FRotationMatrix(GetControlRotation()).GetScaledAxis(EAxis::X);
 	ACharacter* Character = GetCharacter();
+
 	if (Character != nullptr)
 	{
 		Character->AddMovementInput(Direction, AxisValue);
