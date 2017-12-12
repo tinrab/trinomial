@@ -4,7 +4,7 @@
 #include "GameFramework/Character.h"
 #include "PCharacter.generated.h"
 
-UCLASS(Abstract)
+UCLASS()
 class TRINOMIAL_API APCharacter : public ACharacter
 {
 	GENERATED_BODY()

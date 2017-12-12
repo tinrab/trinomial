@@ -4,18 +4,27 @@
 #include "GameFramework/Actor.h"
 #include "PPart.generated.h"
 
-class UStaticMeshComponent;
+class UProceduralMeshComponent;
 
-UCLASS(Abstract)
+UCLASS()
 class TRINOMIAL_API APPart : public AActor
 {
 	GENERATED_BODY()
 
+public:
 	APPart();
 
-protected:
+#if WITH_EDITOR
+	void PostActorCreated() override;
+	void PostLoad() override;
+	void PostEditChangeProperty(struct FPropertyChangedEvent&) override;
+#endif
 
-	/** Mesh for the part */
-	UPROPERTY(VisibleAnywhere)
-	UStaticMeshComponent* Mesh;
+protected:
+	/** Mesh for this part */
+	UPROPERTY(VisibleDefaultsOnly)
+	UProceduralMeshComponent* MeshComponent;
+
+	/** Builds procedural mesh for this part */
+	virtual void BuildMesh();
 };

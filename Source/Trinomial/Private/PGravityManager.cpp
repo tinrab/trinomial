@@ -21,3 +21,8 @@ void APGravityManager::BeginPlay()
 		}
 	}
 }
+
+FCalculateGravityResult APGravityManager::CalculateGravity(FVector Point)
+{
+	return FCalculateGravityResult();
+}

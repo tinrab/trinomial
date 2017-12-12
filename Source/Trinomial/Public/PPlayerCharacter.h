@@ -14,8 +14,6 @@ class TRINOMIAL_API APPlayerCharacter : public APCharacter
 
 	APPlayerCharacter();
 
-protected:
-
 	/** First person camera */
 	UPROPERTY(VisibleAnywhere)
 	UCameraComponent* FirstPersonCameraComponent;
