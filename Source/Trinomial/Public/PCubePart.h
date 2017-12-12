@@ -17,8 +17,11 @@ public:
 	/** Returns size of the cube */
 	FORCEINLINE FIntVector GetCubeSize() const { return CubeSize; };
 
-	/** Set the size of a cube in part units */
+	/** Sets the size of a cube in part units */
 	FORCEINLINE void SetCubeSize(FIntVector InCubeSize) { CubeSize = InCubeSize; };
+
+	/** Returns box component */
+	FORCEINLINE UBoxComponent* GetBoxComponent() const { return BoxComponent; }
 
 protected:
 	void BuildMesh() override;

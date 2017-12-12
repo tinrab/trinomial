@@ -12,10 +12,10 @@ void APDebugGravityPoint::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	/*
 	UWorld* World = GetWorld();
 	FVector Location = GetActorLocation();
-	FCalculateGravityResult Gravity = 
-	DrawDebugSphere(World, GetActorLocation(), 100.0f, 32, FColor::Red);
-	*/
+	FCalculateGravityResult Gravity = APGravityManager::CalculateGravity(Location);
+
+	DrawDebugSphere(World, Location, 25.0f, 16, FColor::Red);
+	DrawDebugLine(World, Location, Gravity.FloorPoint, FColor::Red);
 }

@@ -2,9 +2,14 @@
 #include "Engine/World.h"
 #include "UObject/UObjectIterator.h"
 #include "PPart.h"
+#include "PCubePart.h"
+#include "Components/BoxComponent.h"
+
+APGravityManager* APGravityManager::Singleton;
 
 APGravityManager::APGravityManager()
 {
+	Singleton = this;
 	PrimaryActorTick.bCanEverTick = false;
 }
 
@@ -24,5 +29,31 @@ void APGravityManager::BeginPlay()
 
 FCalculateGravityResult APGravityManager::CalculateGravity(FVector Point)
 {
-	return FCalculateGravityResult();
+	FCalculateGravityResult Result;
+	Result.Distance = TNumericLimits<float>::Max();
+
+	for (APPart* Part : Singleton->Parts)
+	{
+		check(Part);
+		FVector ClosestPoint;
+
+		// Cube part
+		if (Part->IsA<APCubePart>())
+		{
+			APCubePart* CubePart = Cast<APCubePart>(Part);
+			CubePart->GetBoxComponent()->GetClosestPointOnCollision(Point, ClosestPoint);
+		}
+
+		// Check if it is the closest
+		float Distance = FVector::Distance(ClosestPoint, Point);
+		if (Distance < Result.Distance)
+		{
+			Result.Distance = Distance;
+			Result.Part = Part;
+			Result.FloorPoint = ClosestPoint;
+			Result.Direction = ClosestPoint - Point;
+		}
+	}
+
+	return Result;
 }

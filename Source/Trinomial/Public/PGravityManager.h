@@ -15,8 +15,21 @@ struct FCalculateGravityResult
 
 	/** Direction of the gravity */
 	FVector Direction;
-};
 
+	/** Distance to floor */
+	float Distance;
+
+	/** Floor part */
+	TWeakObjectPtr<class APPart> Part;
+
+	FCalculateGravityResult()
+	{
+		FMemory::Memzero(this, sizeof(FCalculateGravityResult));
+	}
+
+	/** Whether result has been assigned */
+	FORCEINLINE bool IsValid() const { return Part.IsValid(); }
+};
 
 UCLASS()
 class TRINOMIAL_API APGravityManager : public AActor
@@ -27,12 +40,14 @@ public:
 	APGravityManager();
 
 	/** Calculates gravity at point */
-	FCalculateGravityResult CalculateGravity(FVector Point);
+	static FCalculateGravityResult CalculateGravity(FVector Point);
 
 private:
-	virtual void BeginPlay() override;
+	static APGravityManager* Singleton;
 
 	/** All parts of the structure */
 	UPROPERTY(EditAnywhere)
 	TArray<APPart*> Parts;
+
+	virtual void BeginPlay() override;
 };
