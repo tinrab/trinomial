@@ -1,5 +1,6 @@
 #include "PPlayerController.h"
 #include "GameFramework/Character.h"
+#include "PCharacter.h"
 
 void APPlayerController::SetupInputComponent()
 {
@@ -21,22 +22,19 @@ void APPlayerController::SetupInputComponent()
 
 void APPlayerController::MoveHorizontal(float AxisValue)
 {
-	FVector Direction = FRotationMatrix(GetControlRotation()).GetScaledAxis(EAxis::Y);
-	ACharacter* Character = GetCharacter();
-	if (Character != nullptr)
+	APCharacter* Character = Cast<APCharacter>(GetCharacter());
+	if (Character )
 	{
-		Character->AddMovementInput(Direction, AxisValue);
+		Character->AddHorizontalMovement(AxisValue);
 	}
 }
 
 void APPlayerController::MoveVertical(float AxisValue)
 {
-	FVector Direction = FRotationMatrix(GetControlRotation()).GetScaledAxis(EAxis::X);
-	ACharacter* Character = GetCharacter();
-
-	if (Character != nullptr)
+	APCharacter* Character = Cast<APCharacter>(GetCharacter());
+	if (Character)
 	{
-		Character->AddMovementInput(Direction, AxisValue);
+		Character->AddVerticalMovement(AxisValue);
 	}
 }
 

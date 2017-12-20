@@ -61,6 +61,7 @@ void APCubePart::BuildMesh()
 	// Create mesh
 	MeshComponent->ClearAllMeshSections();
 	MeshComponent->CreateMeshSection_LinearColor(0, Vertices, Triangles, Normals, UVs, TArray<FLinearColor>(), Tangents, false);
+	MeshComponent->SetMaterial(0, Material);
 
 	BoxComponent->SetBoxExtent(FVector(CubeSize) * 200.0f);
 }

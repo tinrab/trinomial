@@ -12,9 +12,13 @@ class TRINOMIAL_API APPlayerCharacter : public APCharacter
 {
 	GENERATED_BODY()
 
+public:
 	APPlayerCharacter();
 
+protected:
 	/** First person camera */
-	UPROPERTY(VisibleAnywhere)
+	UPROPERTY(VisibleDefaultsOnly)
 	UCameraComponent* FirstPersonCameraComponent;
+
+	void Tick(float DeltaTime);
 };

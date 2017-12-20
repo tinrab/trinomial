@@ -25,6 +25,10 @@ protected:
 	UPROPERTY(VisibleDefaultsOnly)
 	UProceduralMeshComponent* MeshComponent;
 
+	/** Material for the generated mesh */
+	UPROPERTY(EditAnywhere, Category = "Part")
+	UMaterialInterface* Material;
+
 	/** Builds procedural mesh for this part */
 	virtual void BuildMesh();
 };

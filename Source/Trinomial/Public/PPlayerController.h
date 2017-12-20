@@ -9,6 +9,7 @@ class TRINOMIAL_API APPlayerController : public APlayerController
 {
 	GENERATED_BODY()
 
+public:
 	/** Setup input handlers */
 	virtual void SetupInputComponent() override;
 

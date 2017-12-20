@@ -44,16 +44,17 @@ FCalculateGravityResult APGravityManager::CalculateGravity(FVector Point)
 			CubePart->GetBoxComponent()->GetClosestPointOnCollision(Point, ClosestPoint);
 		}
 
-		// Check if it is the closest
+		// Check if it's the closest
 		float Distance = FVector::Distance(ClosestPoint, Point);
 		if (Distance < Result.Distance)
 		{
 			Result.Distance = Distance;
 			Result.Part = Part;
 			Result.FloorPoint = ClosestPoint;
-			Result.Direction = ClosestPoint - Point;
 		}
 	}
+
+	Result.Direction = (Result.FloorPoint - Point).GetSafeNormal();
 
 	return Result;
 }
